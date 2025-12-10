@@ -12,9 +12,18 @@ A Python library to control Neewer RGB lights (specifically tested on RGB62/RGB6
 
 ## Installation
 
+### From Source (Local Development)
+If you have cloned the repository:
 ```bash
-pip install .
+pip install -e .
 ```
+
+### Direct Install from GitHub
+To install it in another project without cloning:
+```bash
+pip install git+https://github.com/matthobby/neewer-lib.git
+```
+*(Note: requires Git installed and access to the repository)*
 
 ## Usage
 
