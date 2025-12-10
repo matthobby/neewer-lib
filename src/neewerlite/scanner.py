@@ -31,13 +31,17 @@ class NeewerScanner:
         # Use BleakScanner to find devices
         devices_dict = await BleakScanner.discover(return_adv=True, timeout=timeout)
         
+        found_candidates: List[tuple[BLEDevice, int]] = []
+        
         for d, adv in devices_dict.values():
             if filter_device(d, adv):
-                found_devices.append(d)
+                found_candidates.append((d, adv.rssi))
                 
         # Sort by signal strength (strongest first)
-        found_devices.sort(key=lambda d: d.rssi, reverse=True)
-        return found_devices
+        found_candidates.sort(key=lambda x: x[1], reverse=True)
+        
+        # Return only the device objects
+        return [c[0] for c in found_candidates]
 
     @staticmethod
     async def find_first(timeout: float = 5.0) -> Optional[BLEDevice]:

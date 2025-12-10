@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "neewerlite"
-version = "0.1.0"
+version = "0.2.1"
 description = "A clean Python library for controlling Neewer RGB lights via Bluetooth LE."
 readme = "README.md"
 authors = [
