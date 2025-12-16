@@ -1,4 +1,4 @@
-# NeewerLite
+# NeewerLite (v0.2.2)
 
 A Python library to control Neewer RGB lights (specifically tested on RGB62/RGB660 Pro models) via Bluetooth Low Energy (BLE).
 
