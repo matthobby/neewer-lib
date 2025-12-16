@@ -15,7 +15,7 @@ A Python library to control Neewer RGB lights (specifically tested on RGB62/RGB6
 ### Standard Installation (PyPI)
 Since the library is published on PyPI, you can simply run:
 ```bash
-pip install neewerlite
+pip install neewerlite==0.2.2
 ```
 
 ### From Source (Local Development)
