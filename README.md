@@ -7,7 +7,7 @@ A Python library to control Neewer RGB lights (specifically tested on RGB62/RGB6
 - **Power Control**: Turn ON/OFF.
 - **RGB Control**: Set Hue, Saturation, Brightness.
 - **CCT Control**: Set Color Temperature (3200K - 5600K).
-- **Effects (FX)**: Trigger built-in scenes (Police, Party, Lightning, etc.).
+- **Effects (FX)**: [EXPERIMENTAL] Trigger built-in scenes (may be unreliable).
 - **Scanner**: Intelligent discovery of Neewer devices.
 
 ## Installation
@@ -69,6 +69,8 @@ if __name__ == "__main__":
 ```
 
 ## Available Effects
+> **Note**: Effects are currently marked as **EXPERIMENTAL**. They may not work reliably on all firmware versions.
+
 - `COP_CAR` (1)
 - `AMBULANCE` (2)
 - `FIRE_TRUCK` (3)
