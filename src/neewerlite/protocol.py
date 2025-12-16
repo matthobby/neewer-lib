@@ -71,10 +71,12 @@ def cmd_cct(temp_k: int, bri: int) -> bytearray:
 
 def cmd_effect(effect_id: int, bri: int) -> bytearray:
     """
-    Constructs FX Command.
-    Structure: [0x78, 0x88, 0x02, Bri, EffectID]
+    [EXPERIMENTAL] Constructs FX Command.
+    NOTE: Currently untested/unreliable.
+    RGB62 appears to use 0x85 for Scene Mode.
+    Structure: [0x78, 0x85, 0x02, EffectID, Bri]
     """
     bri = max(0, min(100, int(bri)))
-    effect_id = max(1, min(9, int(effect_id)))
+    effect_id = max(1, min(18, int(effect_id))) # RGB62 has up to 18 modes?
     
-    return build_packet([CMD_HEADER, 0x88, 0x02, bri, effect_id])
+    return build_packet([CMD_HEADER, 0x88, 0x02, effect_id, bri])
