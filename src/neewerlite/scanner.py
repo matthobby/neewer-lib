@@ -23,7 +23,8 @@ class NeewerScanner:
             
             # 2. Check Name (Fallback)
             name = device.name or adv.local_name or ""
-            if any(k in name.upper() for k in ["NEEWER", "RGB62", "RGB660", "SL-", "GL1", "ZN-"]):
+            if any(k in name.upper() for k in ["NEEWER", "NS02", "NH-", "NW-", "NW_",
+                                                 "RGB62", "RGB660", "SL-", "GL1", "ZN-"]):
                 return True
                 
             return False
