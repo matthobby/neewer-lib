@@ -14,6 +14,8 @@ from .protocol import (
     # Neewer Home (NH/NS02)
     home_power_on, home_power_off, home_query_all,
     home_set_lighting, home_set_color, home_music_mode,
+    # Home scenes
+    HomeScene, SceneFrame, HOME_SCENES,
     # Detection
     is_neewer_home, is_neewer_studio,
     # Constants
@@ -39,6 +41,8 @@ __all__ = [
     # Neewer Home
     "home_power_on", "home_power_off", "home_query_all",
     "home_set_lighting", "home_set_color", "home_music_mode",
+    # Home scenes
+    "HomeScene", "SceneFrame", "HOME_SCENES",
     # Detection
     "is_neewer_home", "is_neewer_studio",
     # Constants
@@ -46,4 +50,4 @@ __all__ = [
     # Exceptions
     "NeewerError", "ConnectionError", "ProtocolError",
 ]
-__version__ = "0.3.0"
+__version__ = "0.3.1"

@@ -224,6 +224,37 @@ class NeewerLight:
         await self._send(protocol.home_music_mode(brightness, mode_id, speed, sensitivity))
 
     # ------------------------------------------------------------------
+    # Scenes — Home strips (0x7A, 73 built-in scenes)
+    # ------------------------------------------------------------------
+
+    async def set_scene(self, scene_id_or_name, brightness: int = 50):
+        """Play a built-in scene on Home/NH strips.
+
+        Args:
+            scene_id_or_name: Scene ID (1-73) or name string (e.g. "Arc-en-ciel")
+            brightness: 0-100
+
+        Example:
+            await light.set_scene("Flamme", brightness=80)
+            await light.set_scene(40)  # Noel
+        """
+        if not self._is_home:
+            logger.warning("set_scene() is for NH strips only. Use set_effect() for studio lights.")
+            return
+
+        from .protocol import HomeScene
+        if isinstance(scene_id_or_name, int):
+            scene = HomeScene.by_id(scene_id_or_name)
+        else:
+            scene = HomeScene.by_name(str(scene_id_or_name))
+
+        if scene is None:
+            raise ValueError(f"Unknown scene: {scene_id_or_name}")
+
+        packet = scene.build_packet(brightness)
+        await self._send(packet)
+
+    # ------------------------------------------------------------------
     # Individual FX shortcuts (studio lights)
     # ------------------------------------------------------------------
 

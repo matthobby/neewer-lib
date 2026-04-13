@@ -1,4 +1,4 @@
-# NeewerLite v0.3.0
+# NeewerLite v0.3.1
 
 Python library for controlling **all Neewer lights** via Bluetooth LE:
 - **Studio lights** (RGB62, RGB660, SL-80, GL1, etc.) — standard 0x78 protocol, 17 FX effects
@@ -88,6 +88,11 @@ async def main():
     # Music reactive mode
     await light.set_music_mode(brightness=50, mode_id=0, speed=50, sensitivity=80)
 
+    # Built-in scenes (73 available)
+    await light.set_scene("Flamme", brightness=80)
+    await light.set_scene("Arc-en-ciel", brightness=60)
+    await light.set_scene(40)  # Noel
+
     await light.disconnect()
 
 asyncio.run(main())
@@ -143,6 +148,35 @@ packet = build_fx(NeewerEffect.LIGHTNING, FXParams(brightness=80, cct=5500, spee
 | 2 | Red + Blue |
 | 3 | White + Blue |
 | 4 | Red + Blue + White |
+
+## Home Strip Scenes (73 built-in)
+
+### By name or ID
+```python
+from neewerlite import HomeScene
+
+# Find by name
+scene = HomeScene.by_name("Flamme")
+packet = scene.build_packet(brightness=80)
+
+# Find by ID
+scene = HomeScene.by_id(40)  # Noel
+
+# Browse by category
+nature_scenes = HomeScene.by_category("Naturel")
+all_scenes = HomeScene.all()
+categories = HomeScene.categories()  # ["Naturel", "Vie", "Festival", "Emotion", "Sport"]
+```
+
+### All 73 scenes
+
+| Category | # | Scenes |
+|----------|---|--------|
+| **Naturel** (24) | 1-24 | Arc-en-ciel, Ciel etoile, Flamme, Lever du soleil, Coucher du soleil, Fleurs de cerisier, Foret, Maree de fleurs, Glacier, Vagues, Mer profonde, Luciole, Reflets ondules, Vagues de Ble, Etang de Lotus, Aurore, Desert Gobi, Printemps, Ete, Automne, Hiver, Meteore, Foudre, Pluie torrentielle |
+| **Vie** (12) | 25-36 | Colore, Film, Tea Time, Reve, Loisirs, Technologie, Matin, Apres-midi, Feerie Lumineuse, Romantique, Fraicheur Estivale, Paresseux |
+| **Festival** (7) | 37-43 | Fete, Anniversaire, Bal de promo, Noel, Halloween, Nouvelle annee, Feux d'artifice |
+| **Emotion** (8) | 44-51 | Doux, Enthousiasme, Confortable, Mystere, Joyeux, Melancolique, Excite, Battement de coeur |
+| **Sport** (22) | 52-73 | Dallas Football, New England Football, Kansas City Football, Madrid Soccer, Barcelona Soccer, Manchester Soccer, Paris Soccer, Munich Soccer, Los Angeles Basketball, Golden State Basketball, Chicago Basketball, Boston Basketball, New York Baseball, Los Angeles Baseball, Boston Baseball, Chicago Baseball, San Francisco Baseball, Toronto Hockey, Montreal Hockey, Chicago Hockey, New York Hockey, Las Vegas Hockey |
 
 ## BLE UUIDs
 - Service: `69400001-b5a3-f393-e0a9-e50e24dcca99`
